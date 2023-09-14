@@ -1,0 +1,7 @@
+{
+  "name": "chromoapp@auth",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
