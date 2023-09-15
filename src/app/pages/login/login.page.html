@@ -29,7 +29,7 @@
           </ion-item>
 
           <ion-button (click)="login()" expand="block">Login</ion-button>
-          <ion-button expand="block" color="secondary" routerLink="/register" routerDirection="forward">Register
+          <ion-button expand="block" color="secondary" (click)="printUser()"  routerDirection="forward">Console.log user
           </ion-button>
 
           <ion-button [routerLink]="['/private']" expand="block">Private</ion-button>

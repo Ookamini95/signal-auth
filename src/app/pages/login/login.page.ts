@@ -16,13 +16,16 @@ export class LoginPage implements OnInit {
   }
 
   constructor(private auth: AuthService, private alertCtrl: AlertController, private router: Router) {
-    setTimeout(() => this.login(), 5000)
   }
 
   ngOnInit() {
   }
 
+  printUser() {
+    console.log(this.auth.getUser())
+  }
+
   login() {
-    this.auth.login(this.credentials)?.pipe(take(5)).subscribe((value) => console.log(value))
+    this.auth.login(this.credentials)?.pipe(take(5)).subscribe((value) => console.log("subscribed token", value))
   }
 }

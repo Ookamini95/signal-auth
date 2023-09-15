@@ -8,20 +8,11 @@ export const AuthGuard: CanActivateFn = (
   state: RouterStateSnapshot
 ) => {
   const auth = inject(AuthService);
-  const alert = inject(AlertController);
 
-  console.log(auth.user())
+  console.log("injected user: ", auth.user())
 
   if (!auth.user()) {
-    alert
-      .create({
-        header: 'Unhauthorized',
-        message: 'You shall not pass.',
-        buttons: ['OK']
-      })
-      .then(newAlert => {
-        newAlert.present();
-      });
+    console.log("NOT AUTHORIZED")
       return false;
   }
   return true
