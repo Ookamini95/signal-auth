@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { AlertController } from '@ionic/angular';
 
 export const AuthGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -9,7 +8,7 @@ export const AuthGuard: CanActivateFn = (
 ) => {
   const auth = inject(AuthService);
 
-  console.log("injected user: ", auth.user())
+  console.log("injected user: ", auth.user(), auth.getUser())
 
   if (!auth.user()) {
     console.log("NOT AUTHORIZED")
