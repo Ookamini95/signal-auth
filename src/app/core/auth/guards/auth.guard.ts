@@ -8,9 +8,7 @@ export const AuthGuard: CanActivateFn = (
 ) => {
   const auth = inject(AuthService);
 
-  console.log("injected user: ", auth.user(), auth.getUser())
-
-  if (!auth.user()) {
+  if (!auth.getToken()) {
     console.log("NOT AUTHORIZED")
       return false;
   }
