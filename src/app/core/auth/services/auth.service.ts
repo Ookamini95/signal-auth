@@ -39,6 +39,7 @@ export class AuthService implements OnDestroy {
     ) { }
 
     ngOnDestroy() {
+        this.logoff();
         this.tokenSetEffect.destroy()
     }
 
