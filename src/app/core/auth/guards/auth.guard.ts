@@ -8,8 +8,8 @@ export const AuthGuard: CanActivateFn = (
 ) => {
   const auth = inject(AuthService);
 
-  if (!auth.getToken()) {
-    console.log("NOT AUTHORIZED")
+  if (!auth.token) {
+    console.log("NOT AUTHORIZED > UI");
       return false;
   }
   return true

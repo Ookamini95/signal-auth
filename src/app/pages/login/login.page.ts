@@ -1,31 +1,40 @@
-import { Component, OnInit, computed, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { switchMap, take } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
-  credentials = {
+export class LoginPage implements  OnDestroy {
+
+  public credentials = {
     email: "test@test.com",
     psw: "test"
   }
 
-  constructor(private auth: AuthService, private alertCtrl: AlertController, private router: Router) {
+  private readonly destroy$ = new Subject<void>();
+
+  constructor(private auth: AuthService, private store: Storage) {
+  }
+
+
+  printUser() {
+    console.log(this.auth.user())
+  }
+
+  login() {
+    this.auth.login$(this.credentials)?.pipe(takeUntil(this.destroy$)).subscribe((value) => console.log("subscribed token", value))
   }
 
   ngOnInit() {
   }
 
-  printUser() {
-    console.log(this.auth.getUser())
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  login() {
-    this.auth.login(this.credentials)?.pipe(take(5)).subscribe((value) => console.log("subscribed token", value))
-  }
 }
